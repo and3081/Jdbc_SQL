@@ -28,8 +28,8 @@ public class DbHooks {
     }
 
     private Connection getNewConnection() throws SQLException {
-        return DriverManager.getConnection(TestData.props.dbUrl(),
-                TestData.props.dbUser(),
+        return DriverManager.getConnection(TestData.db.dbUrl(),
+                TestData.db.dbUser(),
                 TestData.psw.dbPsw());
     }
 }
