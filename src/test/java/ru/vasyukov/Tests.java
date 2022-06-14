@@ -1,29 +1,20 @@
 package ru.vasyukov;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.vasyukov.hooks.DbHooks;
 
 import java.sql.*;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.Properties;
 
 public class Tests extends DbHooks {
-    @DisplayName("Тестирование выборки в Сбер-АСТ")
+    @DisplayName("Тестирование Jdbc")
     @Test
     public void testDb() {
         try {
-            Enumeration<Driver> dr = DriverManager.getDrivers();
-            Iterator<Driver> it = dr.asIterator();
-            while (it.hasNext()) {
-                Driver el = it.next();
-                System.out.println(el.getClass().getName());
-            }
-            System.out.println("valid: "+conn.isValid(1));
-            System.out.println("close: "+conn.isClosed());
-            Properties pr = conn.getClientInfo();
-            pr.forEach((i,j)-> System.out.println(i+" | "+j));
+            Assertions.assertTrue(conn.isValid(1));
+            Assertions.assertFalse(conn.isClosed());
             ResultSet res = execQuery("select * from students");
             if (res != null) {
                 System.out.println(res.getRow());
