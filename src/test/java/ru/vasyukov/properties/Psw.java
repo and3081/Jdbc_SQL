@@ -11,10 +11,7 @@ import org.aeonbits.owner.Config;
         "system:env",
         "file:props.properties"
 })
-public interface Props extends Config {
-    @Key("db.url")
-    String dbUrl();
-
-    @Key("db.user")
-    String dbUser();
+public interface Psw extends Config {
+    @Key("db.psw")
+    String dbPsw();
 }

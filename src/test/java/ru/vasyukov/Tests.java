@@ -7,7 +7,6 @@ import ru.vasyukov.custom.Utils;
 import ru.vasyukov.hooks.DbHooks;
 import ru.vasyukov.steps.Steps;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Tests extends DbHooks {
@@ -15,19 +14,16 @@ public class Tests extends DbHooks {
     @Test
     public void testDb() {
         try {
-            Assertions.assertTrue(conn.isValid(1),
-                    "Подключение к БД не корректно");
-            Assertions.assertFalse(conn.isClosed(),
-                    "БД уже закрыта");
+            Assertions.assertTrue(conn.isValid(1), "Подключение к БД не корректно");
+            Assertions.assertFalse(conn.isClosed(), "БД уже закрыта");
             Steps.dropTables();
             Steps.createTables();
-
-            ResultSet res = Utils.execQuery("select * from students");
-            while (res.next()) {
-                System.out.println(res.getRow() + " | " + res.getString("name"));
-            }
+            Steps.insertTables();
+            Steps.selectTables();
         }
-        catch (SQLException e) { e.printStackTrace(); }
+        catch (SQLException e) {
+            Assertions.fail("SQLException: " + e);
+        }
     }
 
 }
