@@ -1,17 +1,18 @@
 package ru.vasyukov;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import ru.vasyukov.hooks.DbHooks;
+
 import java.sql.*;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Properties;
 
-public class Test {
-    public static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-    public static final String USER = "postgres";
-    public static final String PSW = "rfr_,snm_postgre";
-    public static Connection conn;
-
-    public static void main(String[] args) {
+public class Tests extends DbHooks {
+    @DisplayName("Тестирование выборки в Сбер-АСТ")
+    @Test
+    public void testDb() {
         try {
             Enumeration<Driver> dr = DriverManager.getDrivers();
             Iterator<Driver> it = dr.asIterator();
@@ -19,14 +20,10 @@ public class Test {
                 Driver el = it.next();
                 System.out.println(el.getClass().getName());
             }
-            conn = DriverManager.getConnection(URL, USER, PSW);
             System.out.println("valid: "+conn.isValid(1));
             System.out.println("close: "+conn.isClosed());
             Properties pr = conn.getClientInfo();
             pr.forEach((i,j)-> System.out.println(i+" | "+j));
-            Array ar= conn.createArrayOf("ARRAY", new Object[]{});
-            System.out.println(ar.getBaseTypeName());
-            System.out.println(ar);
             ResultSet res = execQuery("select * from students");
             if (res != null) {
                 System.out.println(res.getRow());
@@ -37,10 +34,6 @@ public class Test {
             }
         }
         catch (SQLException e) { e.printStackTrace(); }
-
-        try { if(conn!=null) conn.close(); }
-        catch (SQLException e) { e.printStackTrace(); }
-
     }
 
     private static ResultSet execQuery(String query) throws SQLException {
