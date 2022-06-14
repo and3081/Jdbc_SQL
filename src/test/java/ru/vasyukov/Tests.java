@@ -3,7 +3,6 @@ package ru.vasyukov;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.vasyukov.custom.Utils;
 import ru.vasyukov.hooks.DbHooks;
 import ru.vasyukov.steps.Steps;
 

@@ -58,6 +58,7 @@ public class Utils {
     public static void assertSelectTable(int count, String query) throws SQLException {
         ResultSet res = Utils.execQuery(query);
         Utils.browseResult(res);
+        System.out.println(res);
         Assertions.assertEquals(count, countResult(res), "Количество строк выборки Select неправильно");
     }
 

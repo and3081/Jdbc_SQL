@@ -3,7 +3,6 @@ package ru.vasyukov.steps;
 import io.qameta.allure.Step;
 import ru.vasyukov.custom.Utils;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Steps {

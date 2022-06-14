@@ -7,5 +7,6 @@ mvn clean test
 mvn allure:serve
 
 # настройки в проперти:
-props.properties
+props.properties   url и login БД
+psw.properties     psw БД
 

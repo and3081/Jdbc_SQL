@@ -9,7 +9,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "system:properties",
         "system:env",
-        "file:props.properties"
+        "file:psw.properties"
 })
 public interface Psw extends Config {
     @Key("db.psw")
