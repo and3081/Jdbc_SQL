@@ -9,9 +9,9 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "system:properties",
         "system:env",
-        "file:db.properties"
+        "file:props.properties"
 })
-public interface Db extends Config {
+public interface Props extends Config {
     @Key("db.url")
     String dbUrl();
 

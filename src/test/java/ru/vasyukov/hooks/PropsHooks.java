@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbHooks {
+public class PropsHooks {
     public static Connection conn;
 
     @Step("Connect")
@@ -28,8 +28,8 @@ public class DbHooks {
     }
 
     private Connection getNewConnection() throws SQLException {
-        return DriverManager.getConnection(TestData.db.dbUrl(),
-                TestData.db.dbUser(),
+        return DriverManager.getConnection(TestData.props.dbUrl(),
+                TestData.props.dbUser(),
                 TestData.psw.dbPsw());
     }
 }

@@ -3,12 +3,12 @@ package ru.vasyukov;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.vasyukov.hooks.DbHooks;
+import ru.vasyukov.hooks.PropsHooks;
 import ru.vasyukov.steps.Steps;
 
 import java.sql.SQLException;
 
-public class Tests extends DbHooks {
+public class Tests extends PropsHooks {
     @DisplayName("Тестирование Jdbc")
     @Test
     public void testDb() {

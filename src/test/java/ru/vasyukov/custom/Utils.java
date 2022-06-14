@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static ru.vasyukov.hooks.DbHooks.conn;
+import static ru.vasyukov.hooks.PropsHooks.conn;
 
 public class Utils {
     private static Statement stat;
