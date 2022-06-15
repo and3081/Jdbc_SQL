@@ -104,6 +104,7 @@ public class Utils {
      * @return LowerCase строки
      */
     public static String lowerRu(String text) {
+        if (text == null) return "";
         return text.toLowerCase(new Locale("RU"));
     }
 }
