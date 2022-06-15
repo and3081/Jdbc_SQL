@@ -30,7 +30,7 @@ public class Utils {
     }
 
     /**
-     * Проверна наличия таблицы в БД
+     * Проверка наличия таблицы в БД
      * @param name имя таблицы
      * @return     true- есть таблица
      * @throws SQLException .
