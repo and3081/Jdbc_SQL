@@ -52,7 +52,7 @@ public class Stats {
     @Step("Строк {count}")
     public static void assertSelectTable(int count, String query) throws SQLException {
         ResultSet res = Stats.execQuery(query);
-        String resStr = Utils.stringResult(res);
+        String resStr = Utils.toStringResult(res);
         System.out.println(resStr);
         //noinspection ResultOfMethodCallIgnored
         Attaches.attachResult(resStr);

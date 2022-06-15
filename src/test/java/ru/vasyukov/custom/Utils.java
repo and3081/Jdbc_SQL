@@ -30,7 +30,7 @@ public class Utils {
         return res.getRow();
     }
 
-    public static String stringResult(ResultSet res) throws SQLException {
+    public static String toStringResult(ResultSet res) throws SQLException {
         StringBuilder str = new StringBuilder(200);
         ResultSetMetaData info = res.getMetaData();
         int col = info.getColumnCount();
