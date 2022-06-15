@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import static ru.vasyukov.hooks.PropsHooks.conn;
 
-public class Stat {
+public class Stats {
     private static Statement stat;
 
     static {
@@ -35,13 +35,13 @@ public class Stat {
     @Step("БД {name}")
     public static void assertDropTable(String name) throws SQLException {
         execUpdate("drop table if exists " + name);
-        Assertions.assertFalse(Util.isTableName(name), "БД " + name + " не удалена");
+        Assertions.assertFalse(Utils.isTableName(name), "БД " + name + " не удалена");
     }
 
     @Step("БД {name}")
     public static void assertCreateTable(String name, String fields) throws SQLException {
         execUpdate("create table if not exists " + name + fields);
-        Assertions.assertTrue(Util.isTableName(name), "БД " + name + " не создана");
+        Assertions.assertTrue(Utils.isTableName(name), "БД " + name + " не создана");
     }
 
     @Step("БД {name}")
@@ -52,9 +52,11 @@ public class Stat {
 
     @Step("Строк {count}")
     public static void assertSelectTable(int count, String query) throws SQLException {
-        ResultSet res = Stat.execQuery(query);
-        Util.browseResult(res);
-        System.out.println(res);
-        Assertions.assertEquals(count, Util.countResult(res), "Количество строк выборки Select неправильно");
+        ResultSet res = Stats.execQuery(query);
+        String resStr = Utils.stringResult(res);
+        System.out.println(resStr);
+        //noinspection ResultOfMethodCallIgnored
+        Attaches.attachResult(resStr);
+        Assertions.assertEquals(count, Utils.countResult(res), "Количество строк выборки Select неправильно");
     }
 }

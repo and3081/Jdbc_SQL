@@ -9,11 +9,11 @@ import java.util.Locale;
 
 import static ru.vasyukov.hooks.PropsHooks.conn;
 
-public class Util {
+public class Utils {
     public static List<String> TableNames() throws SQLException {
         ResultSet res = conn.getMetaData()
                 .getTables(null, null, null, new String[]{"TABLE"});
-        //browseResult(res);
+        //Attachs.attachResult(stringResult(res));
         List<String> names = new ArrayList<>();
         while (res.next()) {
             names.add(res.getString("TABLE_NAME"));
@@ -30,7 +30,8 @@ public class Util {
         return res.getRow();
     }
 
-    public static void browseResult(ResultSet res) throws SQLException {
+    public static String stringResult(ResultSet res) throws SQLException {
+        StringBuilder str = new StringBuilder(200);
         ResultSetMetaData info = res.getMetaData();
         int col = info.getColumnCount();
         if (col > 0) {
@@ -45,32 +46,29 @@ public class Util {
                 }
             }
             res.last();
-            System.out.println("кат." + info.getCatalogName(1) +
-                    "   схема " + info.getSchemaName(1) +
-                    "   табл." + info.getTableName(1) +
-                    "   стр." + res.getRow() +
-                    "   кол." + col);
-            System.out.print("     |");
+            str.append("строк:").append(res.getRow())
+                    .append("   колонок:").append(col)
+                    .append("\n");
+            str.append(" п/п |");
             for (int i=1; i<=col; i++) {
-                System.out.printf("%-" +len[i-1]+ "s|", info.getColumnLabel(i));
+                str.append(String.format("%-" +len[i-1]+ "s|", info.getColumnLabel(i)));
             }
-            System.out.println();
-            System.out.print("тип  |");
+            str.append("\n").append("-----+");
             for (int i=1; i<=col; i++) {
-                System.out.printf("%-" +len[i-1]+ "s|", info.getColumnTypeName(i));
+                str.append(String.format("%-" +len[i-1]+ "s+", "-").replace(" ","-"));
             }
-            System.out.println();
-            System.out.println("--------------------");
+            str.append("\n");
             res.beforeFirst();
             while (res.next()) {
-                System.out.printf("%5d|", res.getRow());
+                str.append(String.format("%-5d|", res.getRow()));
                 for (int i=1; i<=col; i++) {
-                    System.out.printf("%-" +len[i-1]+ "s|", res.getString(i));
+                    str.append(String.format("%-" +len[i-1]+ "s|", res.getString(i)));
                 }
-                System.out.println();
+                str.append("\n");
             }
             res.beforeFirst();
         }
+        return str.toString();
     }
 
     /**
