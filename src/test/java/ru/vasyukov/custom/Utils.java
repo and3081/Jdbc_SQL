@@ -36,7 +36,7 @@ public class Utils {
      * @throws SQLException .
      */
     public static boolean isTableName(String name) throws SQLException {
-        return TableNames().stream().anyMatch(el -> lowerRu(name).equals(lowerRu(el)));
+        return TableNames().stream().anyMatch(el -> lowerRu(name.trim()).equals(lowerRu(el.trim())));
         }
 
     /**
