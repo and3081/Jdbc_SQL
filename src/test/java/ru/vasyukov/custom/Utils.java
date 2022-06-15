@@ -63,12 +63,13 @@ public class Utils {
         if (col > 0) {
             int[] len = new int[col];
             for (int i=1; i<=col; i++) {
-                len[i-1] = Math.max(info.getColumnLabel(i).trim().length(), info.getColumnTypeName(i).trim().length());
-                res.beforeFirst();
-                while (res.next()) {
-                    if (res.getString(i) != null) {
-                        len[i - 1] = Math.max(len[i - 1], res.getString(i).trim().length());
-                    }
+                len[i - 1] = info.getColumnLabel(i).trim().length();
+            }
+            res.beforeFirst();
+            while (res.next()) {
+                for (int i=1; i<=col; i++) {
+                    len[i - 1] = Math.max(len[i - 1],
+                            res.getString(i) == null ? 0 : res.getString(i).trim().length());
                 }
             }
             res.last();

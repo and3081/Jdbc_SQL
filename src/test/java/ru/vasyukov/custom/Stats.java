@@ -34,22 +34,22 @@ public class Stats {
         return stat.executeQuery(query);
     }
 
-    @Step("БД {name}")
+    @Step("Таблица {name}")
     public static void assertDropTable(String name) throws SQLException {
         execUpdate("drop table if exists " + name);
-        Assertions.assertFalse(Utils.isTableName(name), "БД " + name + " не удалена");
+        Assertions.assertFalse(Utils.isTableName(name), "Таблица " + name + " не удалена");
     }
 
-    @Step("БД {name}")
+    @Step("Таблица {name}")
     public static void assertCreateTable(String name, String fields) throws SQLException {
         execUpdate("create table if not exists " + name + fields);
-        Assertions.assertTrue(Utils.isTableName(name), "БД " + name + " не создана");
+        Assertions.assertTrue(Utils.isTableName(name), "Таблица " + name + " не создана");
     }
 
-    @Step("БД {name}")
+    @Step("Таблица {name}")
     public static void assertInsertTable(String name, int count, String fields) throws SQLException {
         int updated = execUpdate("insert into " + name + fields);
-        Assertions.assertEquals(count, updated, "Записи в БД " + name + " не вставлены");
+        Assertions.assertEquals(count, updated, "Записи в таблицу " + name + " не вставлены");
     }
 
     @Step("Строк {count}")
