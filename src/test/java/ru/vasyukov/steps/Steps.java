@@ -8,33 +8,25 @@ import java.util.List;
 
 public class Steps {
     @Step("Drop")
-    public static void dropTables() throws SQLException {
-        Stats.assertDropTable("students");
-        Stats.assertDropTable("workgroups");
+    public static void dropTables(List<String> dbNames) throws SQLException {
+        for (int i=dbNames.size()-1; i>=0; i--) {  // в обратном порядке
+            Stats.assertDropTable(dbNames.get(i));
+        }
     }
 
     @Step("Create")
-    public static void createTables() throws SQLException {
-        Stats.assertCreateTable("workgroups",
-                "(id bigserial primary key, " +
-                        "name varchar(100) not null)");
-        Stats.assertCreateTable("students",
-                "(id bigserial primary key," +
-                        "name varchar(100) not null," +
-                        "age int not null," +
-                        "workgroupid int references workgroups(id))");
+    public static void createTables(List<String> dbNames, List<String> fieldsCreate) throws SQLException {
+        for (int i=0; i<dbNames.size(); i++) {
+            Stats.assertCreateTable(dbNames.get(i), fieldsCreate.get(i));
+        }
     }
 
     @Step("Insert")
-    public static void insertTables() throws SQLException {
-        Stats.assertInsertTable("workgroups", 4,
-                "(name) values ('Chess'), ('Boxing'), ('Swimming'), ('Skiing')");
-        Stats.assertInsertTable("students", 4,
-                "(name, age, workgroupid) values" +
-                        "('Andrey',  10, 1)," +
-                        "('Yuri',     9, 2)," +
-                        "('Alexandr',11, 2)," +
-                        "('Nikita',  12, NULL)");
+    public static void insertTables(List<String> dbNames, List<Integer> countsInsert,
+                                    List<String> fieldsInsert) throws SQLException {
+        for (int i=0; i<dbNames.size(); i++) {
+            Stats.assertInsertTable(dbNames.get(i), countsInsert.get(i), fieldsInsert.get(i));
+        }
     }
 
     @Step("Select")

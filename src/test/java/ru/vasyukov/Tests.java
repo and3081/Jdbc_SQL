@@ -14,12 +14,14 @@ public class Tests extends Hooks {
     @DisplayName("Тестирование Jdbc")
     @ParameterizedTest(name = ".")
     @MethodSource("ru.vasyukov.DataProvider#providerSelect")
-    public void testDb(List<Integer> counts, List<String> selects) {
+    public void testDb(List<String> dbNames, List<String> fieldsCreate,
+                       List<Integer> countsInsert, List<String> fieldsInsert,
+                       List<Integer> countsSelect, List<String> selects) {
         try {
-            Steps.dropTables();
-            Steps.createTables();
-            Steps.insertTables();
-            Steps.selectTables(counts, selects);
+            Steps.dropTables(dbNames);
+            Steps.createTables(dbNames, fieldsCreate);
+            Steps.insertTables(dbNames, countsInsert, fieldsInsert);
+            Steps.selectTables(countsSelect, selects);
         }
         catch (SQLException e) {
             Assertions.fail("SQLException: " + e);

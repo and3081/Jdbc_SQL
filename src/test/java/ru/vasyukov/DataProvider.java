@@ -14,11 +14,31 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 public class DataProvider {
     /**
      * Метод-провайдер для тест-кейса testDb()
-     * @return  стрим аргументов: список количества строк выборок Select,
+     * @return  стрим аргументов:
+     *                            список имен БД,
+     *                            список полей Create,
+     *                            список количества строк Insert,
+     *                            список полей Insert,
+     *                            список количества строк выборок Select,
      *                            список команд выборок Select
      */
     protected static Stream<Arguments> providerSelect() {
-        return Stream.of(arguments(List.of(4, 4 ,1, 4, 2, 2),
+        return Stream.of(arguments(
+                List.of("workgroups", "students"),
+                List.of("(id bigserial primary key, " +
+                                "name varchar(100) not null)",
+                        "(id bigserial primary key," +
+                                "name varchar(100) not null," +
+                                "age int not null," +
+                                "workgroupid int references workgroups(id))"),
+                List.of(4, 4),
+                List.of("(name) values ('Chess'), ('Boxing'), ('Swimming'), ('Skiing')",
+                        "(name, age, workgroupid) values" +
+                                "('Andrey',  10, 1)," +
+                                "('Yuri',     9, 2)," +
+                                "('Alexandr',11, 2)," +
+                                "('Nikita',  12, NULL)"),
+                List.of(4, 4 ,1, 4, 2, 2),
                 List.of("select * " +
                                 "from students",
                         "select * " +
