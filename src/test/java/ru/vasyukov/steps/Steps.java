@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import ru.vasyukov.custom.Stats;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Steps {
     @Step("Drop")
@@ -37,26 +38,9 @@ public class Steps {
     }
 
     @Step("Select")
-    public static void selectTables() throws SQLException {
-        Stats.assertSelectTable(4, "select * " +
-                "from students");
-        Stats.assertSelectTable(4, "select * " +
-                "from workgroups");
-        Stats.assertSelectTable(1, "select name " +
-                "from students s " +
-                "where workgroupid is null");
-        Stats.assertSelectTable(4, "select s.name, s.age," +
-                "case when s.workgroupid is null then '---' else w.name end " +
-                "from students s " +
-                "left join workgroups w on s.workgroupid = w.id");
-        Stats.assertSelectTable(2, "select w.name " +
-                "from workgroups w " +
-                "where w.id not in(select s.workgroupid from students s " +
-                "where s.workgroupid is not null " +
-                "group by s.workgroupid)");
-        Stats.assertSelectTable(2, "select w.name, count(s.name) " +
-                "from students s " +
-                "join workgroups w on s.workgroupid = w.id " +
-                "group by w.name");
+    public static void selectTables(List<Integer> counts, List<String> selects) throws SQLException {
+        for (int i=0; i<counts.size(); i++) {
+            Stats.assertSelectTable(counts.get(i), selects.get(i));
+        }
     }
 }
