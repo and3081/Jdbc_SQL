@@ -13,7 +13,7 @@ public class Utils {
     public static List<String> TableNames() throws SQLException {
         ResultSet res = conn.getMetaData()
                 .getTables(null, null, null, new String[]{"TABLE"});
-        //Attachs.attachResult(stringResult(res));
+        //Attaches.attachResult(stringResult(res));
         List<String> names = new ArrayList<>();
         while (res.next()) {
             names.add(res.getString("TABLE_NAME"));
