@@ -1,12 +1,12 @@
-# Тестирование JDBC
+<h1>Тестирование JDBC</h1>
 
-# запуск всех тестов
+# <h2>запуск всех тестов</h2>
 mvn clean test
 
-# построение отчета Allure
+# <h2>построение отчета Allure</h2>
 mvn allure:serve
 
-# настройки в проперти:
+# <h2>настройки в проперти</h2>
 props.properties - url и login БД<br>
 psw.properties - psw БД
 
