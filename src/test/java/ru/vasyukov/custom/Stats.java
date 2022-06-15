@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static ru.vasyukov.hooks.PropsHooks.conn;
+import static ru.vasyukov.hooks.Hooks.conn;
 
 public class Stats {
     private static Statement stat;

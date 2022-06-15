@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static ru.vasyukov.hooks.PropsHooks.conn;
+import static ru.vasyukov.hooks.Hooks.conn;
 
 public class Utils {
     public static List<String> TableNames() throws SQLException {

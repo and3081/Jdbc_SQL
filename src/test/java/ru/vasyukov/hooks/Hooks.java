@@ -2,6 +2,7 @@ package ru.vasyukov.hooks;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import ru.vasyukov.properties.TestData;
 
@@ -9,13 +10,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PropsHooks {
+public class Hooks {
     public static Connection conn;
 
     @Step("Connect")
     @BeforeEach
     public void init() throws SQLException {
         conn = getNewConnection();
+        Assertions.assertTrue(conn.isValid(1), "Подключение к БД не корректно");
+        Assertions.assertFalse(conn.isClosed(), "БД уже закрыта");
     }
 
     @Step("Disconnect")
