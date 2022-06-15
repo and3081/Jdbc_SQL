@@ -9,6 +9,9 @@ import java.sql.Statement;
 
 import static ru.vasyukov.hooks.Hooks.conn;
 
+/**
+ * Класс sql Statement
+ */
 public class Stats {
     private static Statement stat;
 

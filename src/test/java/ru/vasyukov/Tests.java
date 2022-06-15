@@ -10,6 +10,13 @@ import ru.vasyukov.steps.Steps;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Тестирование Jdbc
+ * 1. Удалить 2 БД от прошлого сеанса
+ * 2. Создать 2 БД
+ * 3. Заполнить тестовыми данными 2 БД
+ * 4. Выполнить 6 выборок
+ */
 public class Tests extends Hooks {
     @DisplayName("Тестирование Jdbc")
     @ParameterizedTest(name = ".")

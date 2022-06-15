@@ -9,7 +9,15 @@ import java.util.Locale;
 
 import static ru.vasyukov.hooks.Hooks.conn;
 
+/**
+ * Класс утилит
+ */
 public class Utils {
+    /**
+     * Запрос имен таблиц БД
+     * @return List имен таблиц
+     * @throws SQLException .
+     */
     public static List<String> TableNames() throws SQLException {
         ResultSet res = conn.getMetaData()
                 .getTables(null, null, null, new String[]{"TABLE"});
@@ -21,15 +29,33 @@ public class Utils {
         return names;
     }
 
+    /**
+     * Проверна наличия таблицы в БД
+     * @param name имя таблицы
+     * @return     true- есть таблица
+     * @throws SQLException .
+     */
     public static boolean isTableName(String name) throws SQLException {
         return TableNames().stream().anyMatch(el -> lowerRu(name).equals(lowerRu(el)));
         }
 
+    /**
+     * Запрос количества строк в результатах
+     * @param res объект ResultSet
+     * @return    количество строк
+     * @throws SQLException .
+     */
     public static int countResult(ResultSet res) throws SQLException {
         res.last();
         return res.getRow();
     }
 
+    /**
+     * toString для объекта результатов
+     * @param res объект ResultSet
+     * @return    строка в виде таблицы результатов с заголовками колонок и авто-шириной колонок
+     * @throws SQLException .
+     */
     public static String toStringResult(ResultSet res) throws SQLException {
         StringBuilder str = new StringBuilder(200);
         ResultSetMetaData info = res.getMetaData();
@@ -73,7 +99,7 @@ public class Utils {
 
     /**
      * LowerCase строки с локалью RU
-     * @param text строка
+     * @param  text строка
      * @return LowerCase строки
      */
     public static String lowerRu(String text) {

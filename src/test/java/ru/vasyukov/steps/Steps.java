@@ -6,6 +6,9 @@ import ru.vasyukov.custom.Stats;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Класс степов
+ */
 public class Steps {
     @Step("Drop")
     public static void dropTables(List<String> dbNames) throws SQLException {
