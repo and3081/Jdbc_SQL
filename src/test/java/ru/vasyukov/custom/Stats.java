@@ -23,7 +23,6 @@ public class Stats {
 
     @Step("{query}")
     public static int execUpdate(String query) throws SQLException {
-        //System.out.println(query);
         return stat.executeUpdate(query);
     }
 
