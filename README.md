@@ -35,9 +35,9 @@ mvn allure:serve
     from students s<br>
     left join workgroups w on s.workgroupid = w.id
   * select w.name from workgroups w<br>
-    where w.id not in(_select s.workgroupid from students s<br>
+    where w.id not in(`select s.workgroupid from students s<br>
        where s.workgroupid is not null<br>
-       group by s.workgroupid_)
+       group by s.workgroupid`)
   * select w.name, count(s.name) from students s<br>
     join workgroups w on s.workgroupid = w.id<br>
     group by w.name 
