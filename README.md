@@ -31,14 +31,13 @@ mvn allure:serve
   * select * from workgroups
   * select name from students s<br>
     where workgroupid is null
-  * select s.name, s.age<br> 
-    case when s.workgroupid is null then '---' else w.name end<br>
+  * select s.name, s.age case when s.workgroupid is null then '---' else w.name end<br>
     from students s<br>
     left join workgroups w on s.workgroupid = w.id
   * select w.name from workgroups w<br>
-    where w.id not in(select s.workgroupid from students s<br>
+    where w.id not in(_select s.workgroupid from students s<br>
        where s.workgroupid is not null<br>
-       group by s.workgroupid)
+       group by s.workgroupid_)
   * select w.name, count(s.name) from students s<br>
     join workgroups w on s.workgroupid = w.id<br>
     group by w.name 
