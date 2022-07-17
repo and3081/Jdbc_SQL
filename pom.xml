@@ -15,15 +15,15 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <postgresql.version>42.3.6</postgresql.version>
-        <junit.jupiter.version>5.7.0-M1</junit.jupiter.version>
+        <junit.jupiter.version>5.8.2</junit.jupiter.version>
         <rest-assured.version>5.0.1</rest-assured.version>
-        <jsoup.version>1.14.3</jsoup.version>
         <json.version>20220320</json.version>
-        <allure.version>2.17.3</allure.version>
-        <owner.version>1.0.12</owner.version>
+        <jsoup.version>1.14.3</jsoup.version>
 
         <aspectj.version>1.9.4</aspectj.version>
         <maven-surefire.version>3.0.0-M5</maven-surefire.version>
+        <allure.version>2.17.3</allure.version>
+        <owner.version>1.0.12</owner.version>
 
         <parallelCount>1</parallelCount>
     </properties>
@@ -63,17 +63,18 @@
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>${jsoup.version}</version>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>${json.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
         </dependency>
 
         <dependency>
@@ -125,9 +126,7 @@
                 <configuration>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        <!--                        awa-->
 <!--                        -Dcucumber.plugin="io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"-->
-                        <!--                        awa-->
                         <!--                        нужно указать кодировку иначе в терминале не будет кирилицы у фич кукумбера-->
                         -Dfile.encoding=UTF-8
                     </argLine>
